@@ -51,7 +51,7 @@ http://pygments.org/
 *) Installation :
 ------------------------------------
 - Download comments
-
+svn checkout http://friendsnippets.googlecode.com/svn/trunk/django/comments 
 
 - put comments in your django application and add it to INSTALLED_APPS.
 
@@ -84,5 +84,5 @@ Replace path by path of the page you want to redirect users after posting a comm
 
 
 TODO :
-- Adding support for unauthenticated users.
+- Add support for unauthenticated users.
 
