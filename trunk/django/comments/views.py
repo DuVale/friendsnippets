@@ -33,6 +33,12 @@ try:
 except AttributeError:
 	COMMENT_REDIRECT_TO=''
 
+try:
+	COMMENT_SIGNIN_VIEW=settings.COMMENTS_SIGNIN_VIEW
+except AttributeError:
+	COMMENT_SIGNIN_VIEW=''
+
+
 def add(request):
     redirect_to=COMMENT_REDIRECT_TO
     if request.POST:
@@ -46,17 +52,12 @@ def add(request):
             if not request.user.is_authenticated():
                 msg = _("In order to post a comment you should have a friendsnippets account.")
                 msg = urlquote_plus(msg)
-                redirect_to=reverse('django_openidconsumer.views.signin') + "?next=" + redirect_to + "&msg=" + msg
+                if COMMENT_SIGNIN_VIEW:
+                    redirect_to=reverse(COMMENT_SIGNIN_VIEW) + "?next=" + redirect_to + "&msg=" + msg
+                else:
+                    redirect_to='/'
                 if not request.user.is_authenticated():
-                    return HttpResponseRedirect(redirect_to)
-                    headline = models.CharField(blank=True, maxlength=100)
-                    comment = models.TextField()
-                    comment_html = models.TextField(blank=True)
-                    user = models.ForeignKey(User)
-                    content_type = models.ForeignKey(ContentType)
-                    object_id = models.IntegerField()
-                    pub_date = models.DateTimeField(blank=True, null=True)
-                    is_removed = models.BooleanField(default=False)      
+                    return HttpResponseRedirect(redirect_to)   
             
             try:    
                 content_type=ContentType.objects.get(id=form.cleaned_data['content_type'])

@@ -82,6 +82,16 @@ Replace app.Mode by the name of app and model you want. model.id could be a cont
 
 Replace path by path of the page you want to redirect users after posting a comment
 
+In settings.py you could set 2 vars :
+
+
+try:
+COMMENT_REDIRECT_TO :  to set default redirect url . 
+
+COMMENTS_SIGNIN_VIEW : to set signin view. It will be used to redirect non authenticated users.
+
+
+
 
 TODO :
 - Add support for unauthenticated users.

@@ -66,7 +66,7 @@ class CommentFormNode(template.Node):
                 'object_id': object_id,
             })
         context['form_comment']=form
-        context['form_comment_action']=reverse('friendsnippets.comments.views.add')
+        context['form_comment_action']=reverse('comments.views.add')
         return ''
         
 def do_comment_form(parser, token):
